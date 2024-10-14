@@ -22,9 +22,15 @@ jobs:
       run: |
         sudo apt-get install make
         make install
-
+    
     - name: Run the application
       run: |
         make run &
-        sleep 10  # Let the server start
-        curl -f http://localhost:3000 || exit 1  # Check if the server is running
+        sleep 20  # Increase sleep time to give server more time to start
+        curl -f http://localhost:3000 || exit 1  # Test if the server is running
+    
+    - name: Check running processes
+      run: ps aux
+    
+    - name: Check open ports
+      run: netstat -tuln
